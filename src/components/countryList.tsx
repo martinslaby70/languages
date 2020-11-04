@@ -24,10 +24,12 @@ const CountryList = ({itemsPerPage, showNative}:props) => {
     const {data, loading, error} = useQuery(getCountries);
     if (loading) return <p>Loading...</p>
     if (error) return <p>Something went wrong.. :(</p>
-        
-        
-
     const {countries}: {countries: ICountry[]} = data;
+        
+    
+    
+
+    
     
     const DisplayCountries = () => {
         //.slice(start, end)
@@ -37,25 +39,25 @@ const CountryList = ({itemsPerPage, showNative}:props) => {
                 <li>
                     <h3>{country.name}<span> - {country.code}</span></h3>
                     <p><span>Capital city - </span>{country.capital}</p>
-                    <CountryLanguage countryCode={country.code} key={country.code}/>
+                    <CountryLanguage countryCode={country.code} showNative={showNative}/>
                 </li>
             )
         });
         
         return(
-            <ul>
+            <ul className="countriesList">
                 {countriesItems}
             </ul>
         )
     }
 
-    
+    const totalItems = Math.ceil(countries.length / itemsPerPage);
 
     return(
         <div>
             <div className="countriesContainer">
                 <DisplayCountries />
-                <Pagination totalItems={countries.length / itemsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+                <Pagination totalItems={totalItems} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
             </div>
             
         </div>

@@ -16,7 +16,7 @@ const Settings = ({itemsPerPage, setItemsPerPage, showNative, setShowNative}: pr
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (numberValue >= 5 && numberValue <= 20)
+        if (numberValue >= 5 && numberValue <= 50)
             setItemsPerPage(numberValue)
         else 
             console.log("this number must be higher then 4 and lower then 21");
@@ -27,7 +27,7 @@ const Settings = ({itemsPerPage, setItemsPerPage, showNative, setShowNative}: pr
 
     return(
         <form onSubmit={(e) => handleSubmit(e)}>
-            <input type="number" onChange={(e) => setNumberValue(Number(e.target.value))} placeholder="5-20" defaultValue={itemsPerPage}/>
+            <input type="number" onChange={(e) => setNumberValue(Number(e.target.value))} placeholder="5-50" defaultValue={itemsPerPage}/>
             <input type="checkbox" onChange={(e) => setCheckBoxValue(e.target.checked)} defaultChecked={showNative}/>
             <button type="submit">Apply settings</button>
         </form>

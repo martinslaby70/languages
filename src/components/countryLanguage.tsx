@@ -8,38 +8,45 @@ import { useQuery } from '@apollo/client';
 import ICountryLanguage from '../interfaces/ICountryLanguage';
 
 interface props {
-    countryCode: string 
+    countryCode: string,
+    showNative: boolean 
 }
-const CountryDetails = ({countryCode}: props) => {
+const CountryDetails = ({countryCode, showNative}: props) => {
 
     const {data, loading, error} = useQuery(getCountryDetails, {
         variables: {code: countryCode}
     });
     
-    const DisplayCountryDetails = () => {
+    const DisplayCountryLanguages = () => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>Something went wrong.. :(</p>
        
         
         const {country}: {country: ICountryLanguage} = data;
 
-        const languages = country.languages.map(language => {
-            console.log(language);
+        const languages = country.languages.map((language, index) => {
             
-            return(
-                <>{language.name}</>
+            const comma = country.languages.length === index + 1 ? '' : ', ';
+            return showNative ?(
+                <p>
+                    {language.name} - <span className="light">({language.native})</span>{comma}
+                </p>
+            ):(
+                <>
+                    {language.name}{comma} 
+                </>
             )
         });
        
         
         
-        return(
-        <p><span>Languages - </span>{languages}</p>
+        return (
+            <p><span>Languages: </span>{languages}</p>
         )
     }
 
 
-    return <DisplayCountryDetails />
+    return <DisplayCountryLanguages />
 
 }
 

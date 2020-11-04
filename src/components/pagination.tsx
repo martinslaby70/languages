@@ -8,34 +8,31 @@ interface paginationProps {
 
 const paginate = ({totalItems, currentPage, setCurrentPage}: paginationProps) => {
     let ret: number[] = [];
-    switch (currentPage)   
+    if (totalItems < 7)
     {
-        //first 3
-        case 1:
-        case 2:
-        case 3: {
-            
-            /* 
-            tato situlace uz jenom z principu nemuze nastat
-            if (totalItems < 7)
-            {
-                for (let i = 1; (i < 7 && i < totalItems) ; i++) {
-                    ret.push(i);                     
+        for (let i = 1; (i < 7 && i <= totalItems) ; i++) 
+        ret.push(i);    
+    }
+    else
+    {
+        switch (currentPage)   
+        {
+            case 1:
+            case 2:
+            case 3: {
+                ret = [1,2,3,4,5,6,7];
+                break;
             }
-            */
-            ret = [1,2,3,4,5,6,7]
-            break;
-        }
-        //last 3
-        case totalItems:
-        case totalItems -1:
-        case totalItems -2: {
-            ret = [totalItems - 6,totalItems - 5,totalItems - 4,totalItems - 3,totalItems - 2,totalItems - 1,totalItems]
-            break;
-        }
-        default: {
-            ret = [currentPage - 3, currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2, currentPage + 3,];
-            break;
+            case totalItems:
+            case totalItems -1:
+            case totalItems -2: {
+                ret = [totalItems - 6,totalItems - 5,totalItems - 4,totalItems - 3,totalItems - 2,totalItems - 1,totalItems]
+                break;
+            }
+            default: {
+                ret = [currentPage - 3, currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2, currentPage + 3,];
+                break;
+            }
         }
     }
 

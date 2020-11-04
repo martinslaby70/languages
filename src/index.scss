@@ -19,17 +19,38 @@ body{
         justify-content: center;
         width: 460px;
 
-        ul{
+        .countriesList{
             width: 400px;  
             height: 650px;
             overflow-y: scroll;  
-            
             display: flex;
             flex-direction: column;
             list-style: none;
             padding: 30px;
             border-radius: 30px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            
+            &::-webkit-scrollbar {
+                width: 10px;
+                
+            }
+
+            &::-webkit-scrollbar-track {
+                margin-bottom: 30px;
+                margin-top: 30px;                
+            }
+                       
+            &::-webkit-scrollbar-thumb {
+                background: rgb(199, 193, 193); 
+                border-radius: 5px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: rgb(181, 173, 173); 
+            }
+
+
             li{
                 width: 100%;
                 text-align: center;
@@ -47,6 +68,14 @@ body{
                     span{
                         color: #a55500;
                     }
+                    .light{
+                        color: rgb(128, 128, 128);
+                    }
+                }
+
+                ul{
+                    padding: 0;
+                    list-style: none;
                 }
             }
         }
