@@ -13,7 +13,13 @@ const Settings = ({itemsPerPage, setItemsPerPage, showNative, setShowNative}: pr
     const [numberValue, setNumberValue] = useState(itemsPerPage);
     const [checkBoxValue, setCheckBoxValue] = useState(showNative); 
 
+    //setting collapse
+    const [isCollapsed, setCollapse] = useState(true);
+    const arrowClass =  isCollapsed ? 'arrow down' : 'arrow up';
+    const collapseClass = isCollapsed ? 'collapsed' : '';
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        setCollapse(true);
         e.preventDefault();
 
         if (numberValue >= 5 && numberValue <= 50)
@@ -26,11 +32,22 @@ const Settings = ({itemsPerPage, setItemsPerPage, showNative, setShowNative}: pr
     }
 
     return(
-        <form onSubmit={(e) => handleSubmit(e)}>
-            <input type="number" onChange={(e) => setNumberValue(Number(e.target.value))} placeholder="5-50" defaultValue={itemsPerPage}/>
-            <input type="checkbox" onChange={(e) => setCheckBoxValue(e.target.checked)} defaultChecked={showNative}/>
-            <button type="submit">Apply settings</button>
-        </form>
+        <div className="form-container" >
+
+            <h3 onClick={() => setCollapse(!isCollapsed)} >Settings <i className={arrowClass} /></h3>
+            <form onSubmit={(e) => handleSubmit(e)} className={collapseClass}>
+                <div>
+                    <label>Countries per page:</label>
+                    <input type="number" onChange={(e) => setNumberValue(Number(e.target.value))} placeholder="5-50" defaultValue={itemsPerPage}/>
+                </div>
+                <div>
+                    <label>view native language</label>
+                    <input type="checkbox" onChange={(e) => setCheckBoxValue(e.target.checked)} defaultChecked={showNative}/>
+                </div>
+                
+                <button type="submit">Apply settings</button>
+            </form>
+        </div>
     )
 }
 
