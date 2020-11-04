@@ -11,9 +11,12 @@ import ICountry from '../interfaces/ICountry';
 import CountryLanguage from './countryLanguage';
 import Pagination from './pagination';
 
-const itemsPerPage = 5;
 
-const CountryList = () => {
+interface props {
+    itemsPerPage: number,
+    showNative: boolean,
+}
+const CountryList = ({itemsPerPage, showNative}:props) => {
     //pagination
     const [currentPage, setCurrentPage] = useState(1);
     

@@ -21,7 +21,9 @@ body{
 
         ul{
             width: 400px;  
-            min-height: 650px;  
+            height: 650px;
+            overflow-y: scroll;  
+            
             display: flex;
             flex-direction: column;
             list-style: none;
