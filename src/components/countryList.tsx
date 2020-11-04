@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 //graphql
 import { getCountries } from '../queries/queries';
@@ -19,11 +19,17 @@ interface props {
 const CountryList = ({itemsPerPage, showNative}:props) => {
     //pagination
     const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    },[itemsPerPage])
     
     //apollo
     const {data, loading, error} = useQuery(getCountries);
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Something went wrong.. :(</p>
+    
+    if (loading) return <p>Loading...</p>                 //loading animation
+    if (error) return <p>Something went wrong.. :(</p>    //error page
+    
     const {countries}: {countries: ICountry[]} = data;
         
     
@@ -58,8 +64,7 @@ const CountryList = ({itemsPerPage, showNative}:props) => {
             <div className="countriesContainer">
                 <DisplayCountries />
                 <Pagination totalItems={totalItems} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-            </div>
-            
+            </div>    
         </div>
     )
 }
